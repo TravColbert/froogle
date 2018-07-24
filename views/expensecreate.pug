@@ -1,0 +1,44 @@
+
+extends index.pug
+
+block content
+  section.layout-width-sd.layout-col
+    .section-hdg.section-hdg-1 Create Expense Entry: 
+    .layout-row.layout-width-1-1
+      .item-listing.layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
+        form(action="/expenses/" method="post")
+          input(id="user" type="hidden" name="userId" value=user.id)
+          input(id="domain" type="hidden" name="domainId" value=user.currentDomain.id)
+          .inputexpenseamount.itemdetail.layout-col
+            label.label(for="amount") Amount:
+            input#amount(type="number" name="amount" placeholder="amount" min=0 step="0.01" autofocus)
+          .inputexpensecategory.itemdetail.layout-col
+            label.label(for="category") Category:
+            input#category(type="text" name="category")
+          .inputexpensedate.itemdetail.layout-col
+            label.label(for="date") Date:
+            input#date(type="datetime-local" name="date")
+          .inputexpenseprovider.itemdetail.layout-col
+            label.label(for="provider") Provider:
+            input#provider(type="text" name="provider" placeholder="to whom did you pay?")
+          .inputexpensenote.itemdetail.layout-col
+            label.label(for="note") Memo:
+            textarea#note(cols="30" rows="10" name="note")
+          .expensesubmit.itemdetail.layout-col
+            .label Actions:
+            .data
+              input#submit.btn.normal.buttonconfirm(type="submit" value="Confirm")
+              a.btn.cancel.buttoncancel(href="/expenses/") Cancel
+      .description.layout-col.layout-xs-hidden.layout-sm-hidden.layout-md-hidden.layout-sd-width-3-8.layout-lg-width-3-8.layout-xl-width-4-8
+        .infotext.section-hdg.section-hdg-3 Create expense
+        .infotext You can add a new expense with this view.
+        .infotext Enter the details for the part that you would like to add. These details can be edited later.
+        .infotext After generating a new part stokr will generate an ID for this part for tracking purposes.
+        .infotext.section-hdg.section-hdg-3 Manufacturer
+        .infotext Enter the manufacturer's name here. This should be the manufacturer for wich the part should be used.
+        .infotext.example.layout-col 
+          .infotext.heading Examples:
+          .infotext Acer
+          .infotext Lenovo
+          .infotext HP
+        .infotext.important This is a required field.
