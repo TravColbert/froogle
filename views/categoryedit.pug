@@ -1,0 +1,32 @@
+extends index.pug
+
+block content
+  section.layout-width-sd.layout-col
+    .section-hdg.section-hdg-1 Edit Category: #{category.id}
+    .layout-row.layout-width-1-1
+      .item-listing.layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
+        form(action="/categoriess/" + category.id + "/" method="post")
+          input(id="id" type="hidden" name="id" value= category.id)
+          .itemdetail.layout-col
+            label.label(for="name") Name:
+            .data 
+              input#name(type="text" name="name" value= category.name autofocus)
+          .itemdetail.layout-col
+            label.label(for="description") Description:
+            .data
+              textarea#description(cols="30" rows="10" name="description") #{category.description}
+          .categorysubmit.itemdetail.layout-col
+            label.label Actions:
+            .data.layout-row
+              input.btn.primary.buttonconfirm(type="submit" id="submit" value="Confirm")
+              a.btn.cancel(href="/categories/" + category.id) Cancel
+      .description.layout-col.layout-xs-hidden.layout-sm-hidden.layout-md-hidden.layout-sd-width-3-8.layout-lg-width-3-8.layout-xl-width-4-8
+        .infotext.section-hdg.section-hdg-3 Edit Category View
+        .infotext You can edit a category with this view.
+        .infotext Modify the details for the user.
+        .infotext.section-hdg.section-hdg-3 Email
+        .infotext Enter the user's email address here. This should be a valid email address
+        .infotext.example.layout-col
+          .infotext.heading Examples:
+          .infotext tommy@test.com
+        .infotext.important This is a required field.
