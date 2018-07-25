@@ -56,7 +56,29 @@ module.exports = function(app,model) {
       })
     },
     get : function(req,res,next) {
-      return app.controllers[model].gets(req,res,next);
+      let myName = "get (categories)";
+      let searchObj = {
+        where : {
+          "id" : req.params.id
+        }
+      }
+      app.tools.checkAuthorization(["list","all"],req.session.user.id,req.session.user.currentDomain.id)
+      .then(response => {
+        if(!response) {
+          app.log("User failed authorization check",myName,6);
+          return next();
+        }
+        app.log("User is authorized to list expenses",myName,6);
+        return app.controllers[model].__get(searchObj);
+      })
+      .then(categories => {
+        req.appData.category = categories[0];
+        req.appData.view = "category";
+        return next();
+      })
+      .catch(err => {
+        return res.send("Err: " + err.message);
+      })
     },
     editCategoryForm : function(req,res,next) {
       let myName = "editCategoryForm";

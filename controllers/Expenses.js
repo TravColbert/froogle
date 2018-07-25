@@ -149,6 +149,40 @@ module.exports = function(app,model) {
         app.log("Error: " + err.message,myName,4);
         return res.send(err.message);
       });
+    },
+    createForm : function(req) {
+      let myName = "createForm (expenses)";
+      return new Promise((resolve,reject) => {
+        let data = {};
+        // We want to pull some categories and providers and put them in a 
+        // handy list for lookup on the client side
+        let categorySearch = {
+          where:{
+            "domainId":req.session.user.currentDomain.id
+          },
+          attributes:["id","name","description"]
+        }
+        app.controllers["categories"].__get(categorySearch)
+        .then(categories => {
+          data.categories = categories;
+          let providerSearch = {
+            where:{
+              "domainId":req.session.user.currentDomain.id
+            },
+            attributes:["provider"]
+          }
+          return app.controllers[model].__get(providerSearch);
+        })
+        .then(providers => {
+          data.providers = providers;
+          app.log("Data sent to create form: " + JSON.stringify(data));
+          resolve(data)
+        })
+        .catch(err => {
+          app.log("Some problem! " + err.message,myName,6);
+          reject(err);
+        });
+      });
     }
   };
   return obj;
