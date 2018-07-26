@@ -1,0 +1,55 @@
+extends index.pug
+
+block content
+  section.layout-width-sd.layout-col
+    .section-hdg.section-hdg-1 Expense #{expense.id}
+    .layout-row.layout-width-1-1
+      .layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
+        .itembanner.layout-col
+          .itemdetail.layout-col
+            label.label(for="expenseamount") Amount:
+            .data#expenseamount #{expense.amount}
+          .itemdetail.layout-col
+            label.label(for="expensedate") Date:
+            .data#expensedate #{expense.date}
+          .itemdetail.layout-col
+            label.label(for="expensecategory") Category:
+            .data#expensecategory #{expense.category.name}
+          .itemdetail.layout-col
+            label.label(for="expenseprovider") Provider:
+            .data#expenseprovider #{expense.provider}
+          .itemdetail.layout-col
+            label.label(for="expenseprovider") Memo:
+            .data#expenseprovider #{expense.note}
+          .itemdetail.layout-col
+            label.label(for="expenseuser") Entered By:
+            .subdata#expenseuser #{expense.user.fullname}
+          .itemdetail.layout-col
+            label.label(for="expensedomain") In Domain:
+            .subdata#expensedomain #{expense.domain.name}
+          #expense_edit_button_container.authUI(data-fetch="expense_edit" data-href="/expenses/" + expense.id + "/actions/edit/")
+        .item-listing.layout-col
+          //- .itemdetail.layout-col
+          //-   label.label(for="domainroles") Roles:
+          //-   each role in domain.roles
+          //-     - let targetLoc = "/roles/" + role.id + "/";
+          //-     .subitem-listing.layout-col.layout-width-1-1.clickable(onclick="goTo('" + targetLoc + "')")
+          //-       .data #{role.name}
+          //-       .subdata #{role.description}
+          .itemdetail.layout-col
+            label.label Actions:
+            .data.layout-row
+              //- input.btnprimary.buttonconfirm(type="submit" id="submit" value="Confirm")
+              #expense_edit_button_container.authUI(data-fetch="expense_edit" data-href="/expenses/" + expense.id + "/actions/edit/")
+              //- a.btn.submit(href="/expenses/" + expense.id + "/actions/edit/") Edit
+              a.btn.cancel(href="/domains/") Cancel
+      .description.layout-col.layout-xs-hidden.layout-sm-hidden.layout-md-hidden.layout-sd-width-3-8.layout-lg-width-3-8.layout-xl-width-4-8
+        .infotext.section-hdg.section-hdg-3 Expense View
+        .infotext You can edit a domain with this view.
+        .infotext Modify the details for the domain.
+        .infotext.section-hdg.section-hdg-3 Name
+        .infotext Enter the user's email address here. This should be a valid email address
+        .infotext.example.layout-col
+          .infotext.heading Examples:
+          .infotext tommy@test.com
+        .infotext.important This is a required field.
