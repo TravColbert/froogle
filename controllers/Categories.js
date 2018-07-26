@@ -34,6 +34,30 @@ module.exports = function(app,model) {
       app.log("Looking for categories in domain: " + domainId,myName,6);
       return app.controllers[model].__get(searchObj);
     },
+    findOrCreate : function(categoryName) {
+      let myName = "findOrCreate";
+      return new Promise((resolve,reject) => {
+        let searchObj = {
+          where : {
+            "name" : categoryName
+          },
+          defaults: {
+            "domainId":req.session.user.currentDomain.id
+          }
+        }
+        app.log("Searching for category: " + searchObj,myName,6);
+        app.models[model].findOrCreate(searchObj)
+        .then((result) => {
+          app.log("Category is: " + JSON.stringify(result[0]),myName,6);
+          app.log("Created is: " + JSON.stringify(result[1]),myName,6);
+          resolve(result[0].id);
+        })
+        .catch(err => {
+          app.log("Err: " + err.message,myName,4);
+          reject(err);
+        });
+      });
+    },
 
     gets : function(req,res,next) {
       let myName = "gets (categories)";

@@ -30,7 +30,19 @@ module.exports = function(app,model) {
         where : {
           "userId" : userId,
           "domainId" : domainId
-        }
+        },
+        include:[
+          {
+            model:app.models["categories"],
+            as:"category"
+          },
+          {
+            model:app.models["users"]
+          },
+          {
+            model:app.models["domains"]
+          }
+        ]
       };
       app.log("Looking for expenses in: " + searchObj,myName,6);
       return app.controllers[model].__get(searchObj);
@@ -40,7 +52,19 @@ module.exports = function(app,model) {
       let searchObj = {
         where : {
           "domainId" : domainId
-        }
+        },
+        include:[
+          {
+            model:app.models["categories"],
+            as:"category"
+          },
+          {
+            model:app.models["users"]
+          },
+          {
+            model:app.models["domains"]
+          }
+        ]
       }
       app.log("Looking for expenses in domain: " + domainId,myName,6);
       return app.controllers[model].__get(searchObj);
@@ -77,7 +101,19 @@ module.exports = function(app,model) {
       let searchObj = {
         where : {
           "id" : req.params.id
-        }
+        },
+        include:[
+          {
+            model:app.models["categories"],
+            as:"category"
+          },
+          {
+            model:app.models["users"]
+          },
+          {
+            model:app.models["domains"]
+          }
+        ]
       }
       app.tools.checkAuthorization(["list","all"],req.session.user.id,req.session.user.currentDomain.id)
       .then(response => {
@@ -141,7 +177,16 @@ module.exports = function(app,model) {
       if(!newExpense) return res.send("Required field missing... try again");
       newExpense.userId = req.session.user.id;
       app.log("New expense: " + JSON.stringify(newExpense),myName,6,"::::>");
-      app.controllers[model].__create(newExpense)
+
+      // We have to either find or create the category entered in the expense form
+      // First, let's try to find it.
+      let categoryName = req.body.category || "Uncategorized";
+      app.controllers["categories"].findOrCreate(req.body.category)
+      .then(categoryId => {
+        newExpense["categoryId"] = categoryId;
+        app.log(newExpense,myName,6);
+        return app.controllers[model].__create(newExpense);
+      })
       .then(expense => {
         return res.redirect('/expenses/' + expense.id + "/");
       })
