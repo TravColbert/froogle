@@ -53,6 +53,7 @@ module.exports = function(app,model) {
         where : {
           "domainId" : domainId
         },
+        order:[["date",'DESC']],
         include:[
           {
             model:app.models["categories"],
