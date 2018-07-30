@@ -173,6 +173,7 @@ module.exports = function(app,model) {
     },
     createExpense : function(req,res,next) {
       let myName = "createExpense";
+      app.log(req.body,myName,6,"==>");
       let newExpense = app.tools.pullParams(req.body,["date","amount","provider","note","public","userId","domainId"]);
       if(!newExpense) return res.send("Required field missing... try again");
       newExpense.userId = req.session.user.id;
@@ -180,15 +181,18 @@ module.exports = function(app,model) {
 
       // We have to either find or create the category entered in the expense form
       // First, let's try to find it.
-      let categoryName = req.body.category || "Uncategorized";
-      app.controllers["categories"].findOrCreate(req.body.category)
+      let categoryName = req.body.cat || "Uncategorized";
+      let categoryDomain = req.session.user.currentDomain.id;
+      app.log("Finding or creating category: " + categoryName,myName,6);
+      app.controllers["categories"].findOrCreate(categoryName,categoryDomain)
       .then(categoryId => {
         newExpense["categoryId"] = categoryId;
-        app.log(newExpense,myName,6);
+        app.log("Creating expense: " + JSON.stringify(newExpense),myName,6);
         return app.controllers[model].__create(newExpense);
       })
       .then(expense => {
-        return res.redirect('/expenses/' + expense.id + "/");
+        return res.redirect('/expenses/');
+        // return res.redirect('/expenses/' + expense.id + "/");
       })
       .catch(err => {
         app.log("Error: " + err.message,myName,4);

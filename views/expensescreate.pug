@@ -13,8 +13,8 @@ block content
             label.label(for="amount") Amount:
             input#amount(type="number" name="amount" placeholder="amount" min=0 step="0.01" autofocus)
           .inputexpensecategory.itemdetail.layout-col
-            label.label(for="category") Category:
-            input#category(type="text" list="categories" name="category")
+            label.label(for="cat") Category:
+            input#cat(type="text" name="cat" list="categories")
             datalist#categories
               each category in expensescreate.categories
                 option(value= category.name)

@@ -34,15 +34,16 @@ module.exports = function(app,model) {
       app.log("Looking for categories in domain: " + domainId,myName,6);
       return app.controllers[model].__get(searchObj);
     },
-    findOrCreate : function(categoryName) {
+    findOrCreate : function(categoryName,categoryDomainId) {
       let myName = "findOrCreate";
       return new Promise((resolve,reject) => {
         let searchObj = {
           where : {
-            "name" : categoryName
+            "name" : categoryName,
+            "domainId" : categoryDomainId
           },
           defaults: {
-            "domainId":req.session.user.currentDomain.id
+            "domainId" : categoryDomainId
           }
         }
         app.log("Searching for category: " + searchObj,myName,6);
