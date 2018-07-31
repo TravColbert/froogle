@@ -31,6 +31,7 @@ module.exports = function(app,model) {
           "userId" : userId,
           "domainId" : domainId
         },
+        order:[["date",'DESC']],
         include:[
           {
             model:app.models["categories"],
