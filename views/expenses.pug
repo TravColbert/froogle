@@ -5,34 +5,7 @@ block content
     .section-hdg.section-hdg-1 Expense Entries (#{expenses.length})
     .layout-row.layout-width-1-1
       .layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
-        ul.compactitemlist
-          each expense in expenses
-            - let targetLoc = "/expenses/" + expense.id + "/";
-            li.layout-row.clickable.compactitem(onclick="goTo('" + targetLoc + "')")
-              .col1.layout-width-1-4.layout-col
-                .itemdetail.layout-col
-                  .label Date:
-                  - let d = new Date(expense.date).toLocaleDateString();
-                  .data.secondaryinfo #{d}
-                .itemdetail.layout-col
-                  .label Time:
-                  - let t = new Date(expense.date).toLocaleTimeString();
-                  .data.secondaryinfo #{t}
-              .col2.layout-width-2-4.layout-col
-                .itemdetail.layout-col
-                  .label Amount:
-                  .data.primaryinfo #{expense.amount}
-              .col1.layout-width-1-4.layout-col
-                .itemdetail.layout-col
-                  .label Category:
-                  .data.secondaryinfo #{expense.category.name}
-                .itemdetail.layout-col
-                  .label Provider:
-                  .data.secondaryinfo #{expense.provider}
-              //- if expense.note
-              //-   .itemdetail.layout-col
-              //-     .label Memo:
-              //-     .data #{expense.note}
+        include expense-list-compact
         #expense_add_button_container.addexpense.layout-row.layout-justify-between.authUI(data-fetch="expense_add" data-href="/actions/create/expenses/")
       .description.layout-col.layout-xs-hidden.layout-sm-hidden.layout-md-hidden.layout-sd-width-3-8.layout-lg-width-3-8.layout-xl-width-4-8
         .infotext.section-hdg.section-hdg-3 Expense List View

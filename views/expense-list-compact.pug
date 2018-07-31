@@ -1,0 +1,24 @@
+ul.compactitemlist
+  each expense in expenses
+    - let targetLoc = "/expenses/" + expense.id + "/";
+    li.layout-row.clickable.compactitem(onclick="goTo('" + targetLoc + "')")
+      .col1.layout-width-1-4.layout-col
+        .itemdetail.layout-col
+          .label Date:
+          - let d = new Date(expense.date).toLocaleDateString();
+          .data.secondaryinfo #{d}
+        .itemdetail.layout-col
+          .label Time:
+          - let t = new Date(expense.date).toLocaleTimeString();
+          .data.secondaryinfo #{t}
+      .col2.layout-width-2-4.layout-col
+        .itemdetail.layout-col
+          .label Amount:
+          .data.primaryinfo #{expense.amount}
+      .col1.layout-width-1-4.layout-col
+        .itemdetail.layout-col
+          .label Category:
+          .data.secondaryinfo #{expense.category.name}
+        .itemdetail.layout-col
+          .label Provider:
+          .data.secondaryinfo #{expense.provider}
