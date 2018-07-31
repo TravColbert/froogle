@@ -1,0 +1,70 @@
+extends index.pug
+
+block content
+  section.layout-width-sd.layout-col
+    .layout-width-1-1.layout-col
+      .layout-width-1-1.layout-col 
+        h1 Welcome to froogle.io! Expense-tracking made easy!
+      .layout-width-1-1.layout-col
+      if(user) 
+        h2 Hi again, #{user.firstname}!
+        include froogle-dashboard
+      else 
+        h2 Let's get started!
+        h4 Sign-In or Log-On to easily keep tabs of your daily expenses.
+    .layout-width-1-1.layout-col
+      if(user)
+        if(invites)
+          .layout-width-1-2.layout-col
+            - let invitesNum = invites.length || 0;
+            if(invitesNum)
+              div Note: You've been invited to connect to the folowing domains: #{invitesNum}
+              each invite in invites
+                div #{invite.roleAppid}
+                .layout-width-1-1.layout-row
+                  a(href= "/invites/" + invite.roleAppid + "/") #{invite.roleAppid}
+        .layout-width-1-1.layout-col 
+          h2 Here are your domains:
+          .layout-width-1-1.layout-row.layout-md-col.layout-wrap
+            if(user.defaultDomainId)
+              .layout-width-1-1 Your default domain is: #{user.defaultDomainId}
+            if(user.domains)
+              each domain in user.domains
+                .layout-width-1-2.layout-md-width-1-1.layout-col
+                  .layout-col
+                    .itemhead.layout-col 
+                      a(href="/domains/" + domain.id + "/") #{domain.name}
+                    .layout-col
+                      .itemdetail #{domain.description}
+                      - let selectedDomain = (user.currentDomain.id==domain.id) ? "*" : "";
+                      - let switchToDomain = (user.currentDomain.id!=domain.id) ? "/users/" + user.id + "/actions/switchdomain/" + domain.id + "/" : "";
+                      if(user.currentDomain.id!=domain.id)
+                        .clickable(onclick="goTo('" + switchToDomain + "')") Set as default
+                    .layout-width-1-1.layout-col
+                      if(domain.notes)
+                        .layout-row.layout-width-1-1 Notes:
+                        each note in domain.notes
+                          .item-listing.layout-row
+                            .layout-row.layout-align-center
+                              i.material-icons.text-grow-x3 receipt
+                            .layout-col 
+                              .nobreak #{note.name}
+                              .layout-row #{note.description}
+        .item-listing.layout-width-1-1.layout-col
+          .layout-width-1-1 Create a new domain here:
+          .layout-width-1-1
+            input#domain(type="text")
+    if(!user)
+      .layout-width-1-1.layout-row.layout-justify-center.layout-align-center
+        h2 Get Started: 
+        //- .layout-width-1-1.layout-row.text-align-center
+        .layout-row
+          a(href="/login/")
+            i.material-icons verified_user
+            div Login
+        .layout-row
+          a(href="/register/") 
+            i.material-icons fingerprint
+            div Register
+        
+        
