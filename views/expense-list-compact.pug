@@ -18,7 +18,8 @@ ul.compactitemlist
       .col1.layout-width-1-4.layout-col
         .itemdetail.layout-col
           .label Category:
-          .data.secondaryinfo #{expense.category.name}
+          - let categoryName = (expense.category && expense.category.name) ? expense.category.name : "none";
+          .data.secondaryinfo #{categoryName}
         .itemdetail.layout-col
           .label Provider:
           .data.secondaryinfo #{expense.provider}

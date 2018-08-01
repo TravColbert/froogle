@@ -1,8 +1,13 @@
 let getUniqueCategories = function(expenses) {
   let uniqueCategories = [];
   expenses.forEach(expense => {
-    if(uniqueCategories.indexOf(expense.category)<0) {
-      uniqueCategories.push(expense.category.name);
+    console.log("Expense\n",expense);
+    if(expense.category!==null) {
+      console.log("Category: " + expense.category.name);
+      if(uniqueCategories.indexOf(expense.category.name)<0) {
+        //if(expense.category.hasOwnProperty("name"))
+          uniqueCategories.push(expense.category.name);
+      }
     }
   })
   return uniqueCategories;
@@ -10,7 +15,7 @@ let getUniqueCategories = function(expenses) {
 
 let totalExpensesPerCategory = function(expenses) {
   let categories = getUniqueCategories(expenses);
-  let totalExpenesesByCategory = {};
+  let totalExpensesByCategory = {};
   const addAmounts = (accumulator,expense) => {
     // console.log("Adding: " + expense.amount + " to " + accumulator);
     return (accumulator + expense.amount);
@@ -22,9 +27,14 @@ let totalExpensesPerCategory = function(expenses) {
     });
     // console.log(thisExpenseCategory);
     let total = thisExpenseCategory.reduce(addAmounts,0);
-    totalExpenesesByCategory[category] = total;
-  })
-  return totalExpenesesByCategory;
+    totalExpensesByCategory[category] = total;
+  });
+  let thisExpenseCategory = expenses.filter(expense => {
+    return (expense.category==null);
+  });
+  total = thisExpenseCategory.reduce(addAmounts,0);
+  totalExpensesByCategory["not categorized"] = total;
+  return totalExpensesByCategory;
 }
 
 expenseList = JSON.parse(document.getElementById('expenses').innerHTML);

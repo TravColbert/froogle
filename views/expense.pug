@@ -14,13 +14,14 @@ block content
             .data#expensedate #{expense.date}
           .itemdetail.layout-col
             label.label(for="expensecategory") Category:
-            .data#expensecategory #{expense.category.name}
+            - let categoryName = (expense.category && expense.category.name) ? expense.category.name : "none";
+            .data#expensecategory #{categoryName}
           .itemdetail.layout-col
             label.label(for="expenseprovider") Provider:
             .data#expenseprovider #{expense.provider}
           .itemdetail.layout-col
-            label.label(for="expenseprovider") Memo:
-            .data#expenseprovider #{expense.note}
+            label.label(for="expensenote") Memo:
+            .data#expensenote #{expense.note}
           .itemdetail.layout-col
             label.label(for="expenseuser") Entered By:
             .subdata#expenseuser #{expense.user.fullname}
