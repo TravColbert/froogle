@@ -29,6 +29,7 @@ block content
             label.label(for="expensedomain") In Domain:
             .subdata#expensedomain #{expense.domain.name}
           #expense_edit_button_container.authUI(data-fetch="expense_edit" data-href="/expenses/" + expense.id + "/actions/edit/")
+          #expense_delete_button_container.authUI(data-fetch="expense_delete" data-href="/expenses/" + expense.id + "/actions/delete/")
         .item-listing.layout-col
           //- .itemdetail.layout-col
           //-   label.label(for="domainroles") Roles:
