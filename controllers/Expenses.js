@@ -153,7 +153,26 @@ module.exports = function(app,model) {
       })
       .catch(err => {
         return res.send(myName + ":" + err.message);
+      });
+    },
+    deleteExpenseForm : function(req,res,next) {
+      let myName = "deleteExpenseForm";
+      let searchObj = {
+        where : {
+          "id" : req.params.id,
+          "userId" : req.session.user.id
+        }
+      };
+      app.controllers[model].__get(searchObj)
+      .then(expenses => {
+        if(!expenses) return res.redirect("/expenses/");
+        req.appData.expense = expenses[0];
+        req.appData.view = "expensedelete";
+        return next();
       })
+      .catch(err => {
+        return res.send(myName + ":" + err.message);
+      });
     },
     editExpense : function(req,res,next) {
       let myName = "editExpense";
@@ -167,6 +186,24 @@ module.exports = function(app,model) {
       .then((expenses) => {
         app.log(expenses[0] + " expenses updated");
         return res.redirect("/expenses/" + requestedExpenseId + "/");
+      })
+      .catch(err => {
+        app.log("Error: " + err.message,myName,4);
+        return res.send(err.message);
+      });
+    },
+    deleteExpense : function(req,res,next) {
+      let myName = "deleteExpense";
+      app.log("Deleting expense: " + req.params.id,myName,4);
+      let searchObj = {
+        where:{
+          id:req.params.id,
+          domainId:req.session.user.currentDomain.id
+        }
+      };
+      app.controllers[model].__delete(searchObj)
+      .then(destroyedRecords => {
+        return res.redirect("/expenses/");
       })
       .catch(err => {
         app.log("Error: " + err.message,myName,4);
