@@ -11,7 +11,7 @@ block content
           input(id="domain" type="hidden" name="domainId" value=user.currentDomain.id)
           .inputexpenseamount.itemdetail.layout-col
             label.label(for="amount") Amount:
-            input#amount(type="number" name="amount" placeholder="amount" min=0 step="0.01" autofocus)
+            input#amount(type="number" name="amount" value=0.00 min=0 step="0.01" autofocus)
           .inputexpensecategory.itemdetail.layout-col
             label.label(for="cat") Category:
             input#cat(type="text" name="cat" list="categories")
