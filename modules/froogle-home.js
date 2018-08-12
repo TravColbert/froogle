@@ -17,7 +17,8 @@ module.exports = function(app) {
         if(req.session.user.currentDomain!==null) {
           // Collect all the expenses for this domain:
           app.log("Collecting recent expenses",myName,6);
-          app.controllers["expenses"].getByDomainId(req.session.user.id,req.session.user.currentDomain)
+          // app.controllers["expenses"].getByDomainId(req.session.user.id,req.session.user.currentDomain)
+          app.controllers["expenses"].getByDomainId(req.session.user.currentDomain.id)
           .then(expenses => {
             req.appData.expenses = expenses;
             resolve(true);
