@@ -13,8 +13,9 @@ ul.compactitemlist
           .data.secondaryinfo #{t}
       .col2.layout-width-2-4.layout-col
         .itemdetail.layout-col
-          .label Amount:
-          .data.primaryinfo #{expense.amount}
+          .label.layout-col.text-align-center Amount:
+          - let expenseAmount = expense.amount.toLocaleString("en-US",{style:"currency",currency:"USD"});
+          .data.primaryinfo.currencyamount.layout-col #{expenseAmount}
       .col1.layout-width-1-4.layout-col
         .itemdetail.layout-col
           .label Category:
