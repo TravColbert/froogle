@@ -3,13 +3,13 @@ extends index.pug
 block content
   section.layout-width-sd.layout-col
     .layout-width-1-1.layout-col
-      .layout-width-1-1.layout-col 
+      .layout-width-1-1.layout-col
         h1 Welcome to froogle.io! Expense-tracking made easy!
       .layout-width-1-1.layout-col
-      if(user) 
+      if(user)
         h2 Hi again, #{user.firstname}!
         include froogle-dashboard
-      else 
+      else
         h2 Let's get started!
         h4 Sign-In or Log-On to easily keep tabs of your daily expenses.
     .layout-width-1-1.layout-col
@@ -23,7 +23,7 @@ block content
                 div #{invite.roleAppid}
                 .layout-width-1-1.layout-row
                   a(href= "/invites/" + invite.roleAppid + "/") #{invite.roleAppid}
-        .layout-width-1-1.layout-col 
+        .layout-width-1-1.layout-col
           h2 Here are your domains:
           .layout-width-1-1.layout-row.layout-md-col.layout-wrap
             if(user.defaultDomainId)
@@ -32,14 +32,14 @@ block content
               each domain in user.domains
                 .layout-width-1-2.layout-md-width-1-1.layout-col
                   .layout-col
-                    .itemhead.layout-col 
+                    .itemhead.layout-col
                       a(href="/domains/" + domain.id + "/") #{domain.name}
                     .layout-col
                       .itemdetail #{domain.description}
-                      - let selectedDomain = (user.currentDomain.id==domain.id) ? "*" : "";
+                      - let selectedDomain = (user.currentDomain.id==domain.id) ? "*" : null;
                       - let switchToDomain = (user.currentDomain.id!=domain.id) ? "/users/" + user.id + "/actions/switchdomain/" + domain.id + "/" : "";
                       if(user.currentDomain.id!=domain.id)
-                        .clickable(onclick="goTo('" + switchToDomain + "')") Set as default
+                        a.btn.btn-small.tertiary.layout-width-1-2(href= switchDomain ) Set As Default
                     .layout-width-1-1.layout-col
                       if(domain.notes)
                         .layout-row.layout-width-1-1 Notes:
@@ -47,7 +47,7 @@ block content
                           .item-listing.layout-row
                             .layout-row.layout-align-center
                               i.material-icons.text-grow-x3 receipt
-                            .layout-col 
+                            .layout-col
                               .nobreak #{note.name}
                               .layout-row #{note.description}
         .item-listing.layout-width-1-1.layout-col
@@ -56,15 +56,14 @@ block content
             input#domain(type="text")
     if(!user)
       .layout-width-1-1.layout-row.layout-justify-center.layout-align-center
-        h2 Get Started: 
+        h2 Get Started:
         //- .layout-width-1-1.layout-row.text-align-center
         .layout-row
           a(href="/login/")
             i.material-icons verified_user
             div Login
         .layout-row
-          a(href="/register/") 
+          a(href="/register/")
             i.material-icons fingerprint
             div Register
-        
-        
+

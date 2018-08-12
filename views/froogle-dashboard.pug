@@ -1,6 +1,7 @@
 .layout-width-1-1.layout-row.layout-md-col.layout-wrap
   .layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.layout-col
     h3 Recent Expenses
+    #expense_add_button_container.authUI(data-fetch="expense_add" data-href="/actions/create/expenses/")
     include expense-list-compact
   .layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.layout-col
     h3 Analysis
