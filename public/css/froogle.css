@@ -1,0 +1,9 @@
+.inputexpenseamount #amount {
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.1em;
+  text-shadow: 0 2px 3px rgba(61, 59, 48, 0.25);
+}
+textarea {
+  width: auto;
+}
