@@ -3,7 +3,7 @@ extends index.pug
 
 block content
   section.layout-width-sd.layout-col
-    .section-hdg.section-hdg-1 Create Expense Entry: 
+    .section-hdg.section-hdg-1 Create Expense Entry:
     .layout-row.layout-width-1-1
       .item-listing.layout-col.layout-width-1-1.layout-sd-width-5-8.layout-lg-width-5-8.layout-xl-width-4-8
         form(action="/expenses/" method="post")
@@ -11,7 +11,7 @@ block content
           input(id="domain" type="hidden" name="domainId" value=user.currentDomain.id)
           .inputexpenseamount.itemdetail.layout-col
             label.label(for="amount") Amount:
-            input#amount(type="number" name="amount" value=0.00 min=0 step="0.01" autofocus)
+            input#amount(type="number" name="amount" min=0 step="0.01" autofocus)
           .inputexpensecategory.itemdetail.layout-col
             label.label(for="cat") Category:
             input#cat(type="text" name="cat" list="categories")
@@ -39,7 +39,7 @@ block content
         .infotext After generating a new part stokr will generate an ID for this part for tracking purposes.
         .infotext.section-hdg.section-hdg-3 Manufacturer
         .infotext Enter the manufacturer's name here. This should be the manufacturer for wich the part should be used.
-        .infotext.example.layout-col 
+        .infotext.example.layout-col
           .infotext.heading Examples:
           .infotext Acer
           .infotext Lenovo
