@@ -36,32 +36,33 @@ block content
                   // a(href= "/invites/" + invite.roleAppid + "/") #{invite.roleAppid}
                 .layout-width-1-1.layout-col You've probably received notification about this invitation. If not you can ignore it for now.
         .layout-width-1-1.layout-col
-          h2 Here are your domains:
+          h2 Here are your accounts:
           .layout-width-1-1.layout-row.layout-md-col.layout-wrap
-            if(user.defaultDomainId)
-              .layout-width-1-1 Your default domain is: #{user.defaultDomainId}
+            //- if(user.defaultDomainId)
+            //-   .layout-width-1-1 Your default domain is: #{user.defaultDomainId}
             if(user.domains)
               each domain in user.domains
-                .layout-width-1-2.layout-md-width-1-1.layout-col
-                  .layout-col
-                    .itemhead.layout-col
-                      a(href="/domains/" + domain.id + "/") #{domain.name}
+                if domain.name!="Trash Domain" && domain.name!="Default Domain"
+                  .layout-width-1-2.layout-md-width-1-1.layout-col
                     .layout-col
-                      .itemdetail #{domain.description}
-                      - let selectedDomain = (user.currentDomain.id==domain.id) ? "*" : null;
-                      - let switchToDomain = (user.currentDomain.id!=domain.id) ? "/users/" + user.id + "/actions/switchdomain/" + domain.id + "/" : "";
-                      if(user.currentDomain.id!=domain.id)
-                        a.btn.btn-small.tertiary.layout-width-1-2(href= switchDomain ) Set As Default
-                    .layout-width-1-1.layout-col
-                      if(domain.notes)
-                        .layout-row.layout-width-1-1 Notes:
-                        each note in domain.notes
-                          .item-listing.layout-row
-                            .layout-row.layout-align-center
-                              i.material-icons.text-grow-x3 receipt
-                            .layout-col
-                              .nobreak #{note.name}
-                              .layout-row #{note.description}
+                      .itemhead.layout-col
+                        a(href="/domains/" + domain.id + "/") #{domain.name}
+                      .layout-col
+                        .itemdetail #{domain.description}
+                        - let selectedDomain = (user.currentDomain.id==domain.id) ? "*" : null;
+                        - let switchToDomain = (user.currentDomain.id!=domain.id) ? "/users/" + user.id + "/actions/switchdomain/" + domain.id + "/" : "";
+                        if(user.currentDomain.id!=domain.id)
+                          a.btn.btn-small.tertiary.layout-width-1-2(href= switchDomain ) Set As Default
+                      .layout-width-1-1.layout-col
+                        if(domain.notes)
+                          .layout-row.layout-width-1-1 Notes:
+                          each note in domain.notes
+                            .item-listing.layout-row
+                              .layout-row.layout-align-center
+                                i.material-icons.text-grow-x3 receipt
+                              .layout-col
+                                .nobreak #{note.name}
+                                .layout-row #{note.description}
         .item-listing.layout-width-1-1.layout-col
           .layout-width-1-1 Create a new domain here:
           .layout-width-1-1
