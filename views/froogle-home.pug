@@ -11,7 +11,17 @@ block content
         include froogle-dashboard
       else
         h2 Let's get started!
-        h4 Sign-In or Log-On to easily keep tabs of your daily expenses.
+        .layout-width-1-1.layout-row.layout-md-col.layout-wrap
+          .app-features.layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.clickable(onclick="goTo('/login/')")
+            .layout-width-1-4.layout-col.text-align-center.layout-justify-center.layout-align-center.textshadow
+              i.material-icons.big-icon verified_user
+            .layout-width-3-4.text-align-justify Log-In to see your financial dashboard. Manage your log of expenses. Create a personalized budget. Keep important people informed.
+          .app-features.layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.clickable(onclick="goTo('/register/')")
+            .layout-width-1-4.layout-col.text-align-center.layout-justify-center.layout-align-center.textshadow
+              i.material-icons.big-icon fingerprint
+            .layout-width-3-4.text-align-justify Get started by creating an account. Begin tracking your daily expenditures. Feel better knowing how your money is spent.
+
+        h4 #[a(href="/register/") Sign-Up] or #[a(href="/login/") Log-On] to easily keep tabs of your daily expenses.
     .layout-width-1-1.layout-col
       if(user)
         if(invites)
@@ -56,16 +66,16 @@ block content
           .layout-width-1-1 Create a new domain here:
           .layout-width-1-1
             input#domain(type="text")
-    if(!user)
-      .layout-width-1-1.layout-row.layout-justify-center.layout-align-center
-        h2 Get Started:
-        //- .layout-width-1-1.layout-row.text-align-center
-        .layout-row
-          a(href="/login/")
-            i.material-icons verified_user
-            div Login
-        .layout-row
-          a(href="/register/")
-            i.material-icons fingerprint
-            div Register
+      else
+        .layout-width-1-1.layout-row.layout-md-col.layout-wrap
+          .app-features.layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.layout-col
+            h3 Why Track What You Spend?
+            .layout-width-1-1 Awareness is the key to financial responsibility. Understanding your spending habits puts you in better control of your money.
+            .layout-width-1-1 Unfortunately technology has made it easier than ever to lose track of what you are spending. Credit-cards and mobile payment systems turn your bank account into a leaky bucket. If you are disappointed with your financial strength at the end of the month the first thing is to become aware of what is making your account weak.
+            .layout-width-1-1 Expense-tracking helps you find the weaknesses.
+          .app-features.layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.layout-col
+            h3 Why froogle?
+            .layout-width-1-1 froogle.io is the easiest way to achieve true financial awareness.
+            .layout-width-1-1 Stop collecting paper receipts of your expenditures. Use froogle.io to keep track of how you spend and what your budget goals are. Simply record what you spend the moment you spend. froogle.io will take care of the rest!
+
 
