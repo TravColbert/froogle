@@ -38,12 +38,10 @@ block content
         .layout-width-1-1.layout-col
           h2 Here are your accounts:
           .layout-width-1-1.layout-row.layout-md-col.layout-wrap
-            //- if(user.defaultDomainId)
-            //-   .layout-width-1-1 Your default domain is: #{user.defaultDomainId}
             if(user.domains)
               each domain in user.domains
                 if domain.name!="Trash Domain" && domain.name!="Default Domain"
-                  .layout-width-1-2.layout-md-width-1-1.layout-col
+                  .item-listing.layout-width-1-2.layout-md-width-1-1.layout-col
                     .layout-col
                       .itemhead.layout-col
                         a(href="/domains/" + domain.id + "/") #{domain.name}
