@@ -24,10 +24,9 @@ block content
                 div Invitation #: #{invite.roleAppid}
                 .layout-width-1-1.layout-row
                   a.btn.btn-small.tertiary.layout-width-1-2(href= "/invites/" + invite.roleAppid + "/" ) Accept Invite
-                  // a(href= "/invites/" + invite.roleAppid + "/") #{invite.roleAppid}
                 .layout-width-1-1.layout-col You've probably received notification about this invitation. If not you can ignore it for now.
         .layout-width-1-1.layout-col
-          h2 Here are your accounts:
+          h2 Here are your personal accounts:
           .layout-width-1-1.layout-row.layout-md-col.layout-wrap
             if(user.domains)
               each domain in user.domains
@@ -52,10 +51,7 @@ block content
                               .layout-col
                                 .nobreak #{note.name}
                                 .layout-row #{note.description}
-        .item-listing.layout-width-1-1.layout-col
-          .layout-width-1-1 Create a new domain here:
-          .layout-width-1-1
-            input#domain(type="text")
+        +create-or-see-domains("Account")
       else
         .layout-width-1-1.layout-row.layout-md-col.layout-wrap
           .app-features.layout-width-1-2.layout-md-width-1-1.layout-sm-width-1-1.layout-xs-width-1-1.layout-col
