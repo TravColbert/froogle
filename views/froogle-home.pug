@@ -16,15 +16,7 @@ block content
     .layout-width-1-1.layout-col
       if(user)
         if(invites)
-          .layout-width-1-2.layout-col
-            - let invitesNum = invites.length || 0;
-            if(invitesNum)
-              div Note: You've been invited to connect to the folowing domains: #{invitesNum}
-              each invite in invites
-                div Invitation #: #{invite.roleAppid}
-                .layout-width-1-1.layout-row
-                  a.btn.btn-small.tertiary.layout-width-1-2(href= "/invites/" + invite.roleAppid + "/" ) Accept Invite
-                .layout-width-1-1.layout-col You've probably received notification about this invitation. If not you can ignore it for now.
+          include invites
         .layout-width-1-1.layout-col
           h2 Here are your personal accounts:
           .layout-width-1-1.layout-row.layout-md-col.layout-wrap
@@ -33,14 +25,14 @@ block content
                 if domain.name!="Trash Domain" && domain.name!="Default Domain"
                   .item-listing.layout-width-1-2.layout-md-width-1-1.layout-col
                     .layout-col
-                      .itemhead.layout-col
-                        a(href="/domains/" + domain.id + "/") #{domain.name}
+                      .itemhead.layout-row #[a(href="/domains/" + domain.id + "/") #{domain.name}] #[i.material-icons.badge(alt="(default account)" title="This is currently your default account") stars]
                       .layout-col
                         .itemdetail #{domain.description}
-                        - let selectedDomain = (user.currentDomain.id==domain.id) ? "*" : null;
-                        - let switchToDomain = (user.currentDomain.id!=domain.id) ? "/users/" + user.id + "/actions/switchdomain/" + domain.id + "/" : "";
-                        if(user.currentDomain.id!=domain.id)
-                          a.btn.btn-small.tertiary.layout-width-1-2(href= switchDomain ) Set As Default
+                        - let defaultToDomain = (user.defaultDomainId!=domain.id) ? "/users/" + user.id + "/actions/setdefaultdomain/" + domain.id + "/" : "";
+                        if(user.defaultDomainId!=domain.id)
+                          a#domain_make_default_button.btn.tertiary.layout-size-x1.buttondomaindefault(href= defaultToDomain)
+                            i.material-icons stars
+                            span Make Default
                       .layout-width-1-1.layout-col
                         if(domain.notes)
                           .layout-row.layout-width-1-1 Notes:
