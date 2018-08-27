@@ -17,32 +17,7 @@ block content
       if(user)
         if(invites)
           include invites
-        .layout-width-1-1.layout-col
-          h2 Here are your personal accounts:
-          .layout-width-1-1.layout-row.layout-md-col.layout-wrap
-            if(user.domains)
-              each domain in user.domains
-                if domain.name!="Trash Domain" && domain.name!="Default Domain"
-                  .item-listing.layout-width-1-2.layout-md-width-1-1.layout-col
-                    .layout-col
-                      .itemhead.layout-row #[a(href="/domains/" + domain.id + "/") #{domain.name}] #[i.material-icons.badge(alt="(default account)" title="This is currently your default account") stars]
-                      .layout-col
-                        .itemdetail #{domain.description}
-                        - let defaultToDomain = (user.defaultDomainId!=domain.id) ? "/users/" + user.id + "/actions/setdefaultdomain/" + domain.id + "/" : "";
-                        if(user.defaultDomainId!=domain.id)
-                          a#domain_make_default_button.btn.tertiary.layout-size-x1.buttondomaindefault(href= defaultToDomain)
-                            i.material-icons stars
-                            span Make Default
-                      .layout-width-1-1.layout-col
-                        if(domain.notes)
-                          .layout-row.layout-width-1-1 Notes:
-                          each note in domain.notes
-                            .item-listing.layout-row
-                              .layout-row.layout-align-center
-                                i.material-icons.text-grow-x3 receipt
-                              .layout-col
-                                .nobreak #{note.name}
-                                .layout-row #{note.description}
+        +list-domains("Account")
         +create-or-see-domains("Account")
       else
         .layout-width-1-1.layout-row.layout-md-col.layout-wrap
