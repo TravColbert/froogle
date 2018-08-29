@@ -77,7 +77,7 @@ module.exports = function(app,model) {
       // let searchObj = {
       //   where : {
       //     "userId" : req.session.user.id,
-      //     "domainId" : req.session.user.currentDomain.id  
+      //     "domainId" : req.session.user.currentDomain.id
       //   }
       // }
       app.tools.checkAuthorization(["list","all"],req.session.user.id,req.session.user.currentDomain.id)
@@ -91,6 +91,7 @@ module.exports = function(app,model) {
       })
       .then(expenses => {
         req.appData.expenses = expenses;
+        req.appData.models.push(model);
         req.appData.view = "expenses";
         return next();
       })
@@ -128,12 +129,13 @@ module.exports = function(app,model) {
       })
       .then(expenses => {
         req.appData.expense = expenses[0];
+        req.appData.models.push(model);
         req.appData.view = "expense";
         return next();
       })
       .catch(err => {
         return res.send("Err: " + err.message);
-      })      
+      })
     },
     editExpenseForm : function(req,res,next) {
       let myName = "editExpenseForm";
@@ -148,6 +150,7 @@ module.exports = function(app,model) {
         if(!expenses) return res.redirect("/expenses/");
         app.log("Expense found: " + expenses[0],myName,6);
         req.appData.expense = expenses[0];
+        req.appData.models.push(model);
         req.appData.view = "expenseedit";
         return next();
       })
@@ -167,6 +170,7 @@ module.exports = function(app,model) {
       .then(expenses => {
         if(!expenses) return res.redirect("/expenses/");
         req.appData.expense = expenses[0];
+        req.appData.models.push(model);
         req.appData.view = "expensedelete";
         return next();
       })
@@ -242,7 +246,7 @@ module.exports = function(app,model) {
       let myName = "createForm (expenses)";
       return new Promise((resolve,reject) => {
         let data = {};
-        // We want to pull some categories and providers and put them in a 
+        // We want to pull some categories and providers and put them in a
         // handy list for lookup on the client side
         let categorySearch = {
           where:{
