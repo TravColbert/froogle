@@ -142,8 +142,7 @@ module.exports = function(app,model) {
 
       let searchObj = {
         where : {
-          "id" : req.params.id,
-          "userId" : req.session.user.id
+          "id" : req.params.id
         }
       };
 
@@ -168,8 +167,8 @@ module.exports = function(app,model) {
         let selectedCategory = categories.filter(category => {
           return category.id==req.appData.expense.categoryId;
         });
-	app.log("Found " + selectedCategory.length + " categories",myName,6);
-	app.log(selectedCategory);
+        app.log("Found " + selectedCategory.length + " categories",myName,6);
+        app.log(selectedCategory);
         if(selectedCategory[0]) {
           req.appData.expense["categoryName"] = selectedCategory[0].name;
         }
@@ -224,10 +223,10 @@ module.exports = function(app,model) {
       app.log("Finding or creating category: " + categoryName,myName,6);
       app.controllers["categories"].findOrCreate(categoryName,categoryDomain)
       .then(category => {
-	if(category) {
-	  app.log(category,myName,6);
+        if(category) {
+          app.log(category,myName,6);
           let categoryId = category.id;
-	}
+        }
         expenseObj["categoryId"] = categoryId;
         app.log("Updating expense: " + JSON.stringify(expenseObj),myName,6);
         return app.controllers[model].__update({values:expenseObj,options:{where:{"id":requestedExpenseId}}})
