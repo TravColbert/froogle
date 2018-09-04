@@ -167,9 +167,11 @@ module.exports = function(app,model) {
       .then(categories => {
         let selectedCategory = categories.filter(category => {
           return category.id==req.appData.expense.categoryId;
-        })
+        });
+	app.log("Found " + selectedCategory.length + " categories",myName,6);
+	app.log(selectedCategory);
         if(selectedCategory[0]) {
-          req.appData.expense.categoryName = selectedCategory[0].name;
+          req.appData.expense["categoryName"] = selectedCategory[0].name;
         }
         req.appData.categories = categories;
         let providerSearch = {
@@ -186,7 +188,7 @@ module.exports = function(app,model) {
       })
       .catch(err => {
         app.log("Some problem! " + err.message,myName,6);
-        reject(err);
+        return res.send(err.message);
       });
     },
     deleteExpenseForm : function(req,res,next) {
@@ -221,7 +223,11 @@ module.exports = function(app,model) {
       let categoryDomain = req.session.user.currentDomain.id;
       app.log("Finding or creating category: " + categoryName,myName,6);
       app.controllers["categories"].findOrCreate(categoryName,categoryDomain)
-      .then(categoryId => {
+      .then(category => {
+	if(category) {
+	  app.log(category,myName,6);
+          let categoryId = category.id;
+	}
         expenseObj["categoryId"] = categoryId;
         app.log("Updating expense: " + JSON.stringify(expenseObj),myName,6);
         return app.controllers[model].__update({values:expenseObj,options:{where:{"id":requestedExpenseId}}})
