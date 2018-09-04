@@ -46,7 +46,7 @@ module.exports = function(app,model) {
             "domainId" : categoryDomainId
           }
         }
-        app.log("Searching for category: " + searchObj,myName,6);
+        app.log("Searching for category: " + JSON.stringify(searchObj),myName,6);
         app.models[model].findOrCreate(searchObj)
         .then((result) => {
           app.log("Category is: " + JSON.stringify(result[0]),myName,6);

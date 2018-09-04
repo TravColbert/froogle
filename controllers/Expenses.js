@@ -222,11 +222,7 @@ module.exports = function(app,model) {
       let categoryDomain = req.session.user.currentDomain.id;
       app.log("Finding or creating category: " + categoryName,myName,6);
       app.controllers["categories"].findOrCreate(categoryName,categoryDomain)
-      .then(category => {
-        if(category) {
-          app.log(category,myName,6);
-          let categoryId = category.id;
-        }
+      .then(categoryId => {
         expenseObj["categoryId"] = categoryId;
         app.log("Updating expense: " + JSON.stringify(expenseObj),myName,6);
         return app.controllers[model].__update({values:expenseObj,options:{where:{"id":requestedExpenseId}}})
