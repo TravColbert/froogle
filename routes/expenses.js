@@ -7,6 +7,6 @@ module.exports = function(app) {
   router.get('/:id/actions/edit',app.tools.checkAuthentication,app.controllers["expenses"].editExpenseForm);
   router.get('/:id/actions/delete',app.tools.checkAuthentication,app.controllers["expenses"].deleteExpense);
   router.post('/',app.tools.checkAuthentication,app.controllers["expenses"].createExpense);
-  // router.post('/:id/',app.tools.checkAuthentication,app.controllers["notes"].editNote);
+  router.post('/:id/',app.tools.checkAuthentication,app.controllers["expenses"].editExpense);
   return router;
 };

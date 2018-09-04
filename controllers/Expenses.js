@@ -139,12 +139,14 @@ module.exports = function(app,model) {
     },
     editExpenseForm : function(req,res,next) {
       let myName = "editExpenseForm";
+
       let searchObj = {
         where : {
           "id" : req.params.id,
           "userId" : req.session.user.id
         }
       };
+
       app.controllers[model].__get(searchObj)
       .then(expenses => {
         if(!expenses) return res.redirect("/expenses/");
@@ -152,10 +154,39 @@ module.exports = function(app,model) {
         req.appData.expense = expenses[0];
         req.appData.models.push(model);
         req.appData.view = "expenseedit";
+        // We want to pull some categories and providers and put them in a
+        // handy list for lookup on the client side
+        let categorySearch = {
+          where:{
+            "domainId":req.session.user.currentDomain.id
+          },
+          attributes:["id","name","description"]
+        }
+        return app.controllers["categories"].__get(categorySearch)
+      })
+      .then(categories => {
+        let selectedCategory = categories.filter(category => {
+          return category.id==req.appData.expense.categoryId;
+        })
+        if(selectedCategory[0]) {
+          req.appData.expense.categoryName = selectedCategory[0].name;
+        }
+        req.appData.categories = categories;
+        let providerSearch = {
+          where:{
+            "domainId":req.session.user.currentDomain.id
+          },
+          attributes:["provider"]
+        }
+        return app.controllers[model].__get(providerSearch);
+      })
+      .then(providers => {
+        req.appData.providers = providers;
         return next();
       })
       .catch(err => {
-        return res.send(myName + ":" + err.message);
+        app.log("Some problem! " + err.message,myName,6);
+        reject(err);
       });
     },
     deleteExpenseForm : function(req,res,next) {
@@ -185,8 +216,16 @@ module.exports = function(app,model) {
       app.log(expenseObj.id + " " + requestedExpenseId);
       if(expenseObj.id!=requestedExpenseId) return res.send("Didn't request the requested expense");
       delete expenseObj.id;
-      app.log("Updating expense: " + JSON.stringify(expenseObj),myName,6);
-      app.controllers[model].__update({values:expenseObj,options:{where:{"id":requestedExpenseId}}})
+
+      let categoryName = req.body.cat || "Uncategorized";
+      let categoryDomain = req.session.user.currentDomain.id;
+      app.log("Finding or creating category: " + categoryName,myName,6);
+      app.controllers["categories"].findOrCreate(categoryName,categoryDomain)
+      .then(categoryId => {
+        expenseObj["categoryId"] = categoryId;
+        app.log("Updating expense: " + JSON.stringify(expenseObj),myName,6);
+        return app.controllers[model].__update({values:expenseObj,options:{where:{"id":requestedExpenseId}}})
+      })
       .then((expenses) => {
         app.log(expenses[0] + " expenses updated");
         return res.redirect("/expenses/" + requestedExpenseId + "/");
