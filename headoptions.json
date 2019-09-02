@@ -1,5 +1,0 @@
-[
-  {"type":"link","rel":"stylesheet","media":"all","href":"/css/froogle.css"},
-  {"type":"link","rel":"stylesheet","media":"screen","href":"https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"},
-  {"type":"script","src":"https://cdn.jsdelivr.net/npm/flatpickr"}
-]
