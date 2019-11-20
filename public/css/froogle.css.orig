@@ -1,0 +1,322 @@
+body {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background-color: rgb(245,245,245);
+}
+
+body, div {
+  display: flex;
+}
+
+.noresize {
+  resize: none;
+}
+
+.bigproblem, .bigbanner {
+  align-items: center;
+  flex-direction: column;
+}
+
+.error404, .welcome {
+  color: silver;
+  font-size: 7em;
+}
+
+.vertical,
+.form--vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.jright {
+  text-align: right;
+}
+
+.jleft {
+  text-align: left;
+}
+
+.jcenter {
+  text-align: center;
+}
+
+.loginbox {
+  width: 80%;
+}
+
+#loginform {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+*:focus {
+  outline: none;
+}
+
+input,
+select {
+  padding: 8px;
+  font-size: 1em;
+}
+
+input::placeholder {
+  color: #b0b0b0;
+}
+
+form *:not(:last-child) {
+  margin: 0 0 0.5em;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='datetime-local'],
+select,
+textarea {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px dashed silver;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+textarea:focus {
+  background-color: #fdfdfd;
+  border-bottom: 1px solid silver;
+  outline: none;
+}
+
+.welcome a {
+  /* text-transform: none; */
+  text-decoration: none;
+  color: silver;
+}
+
+#expensetable {
+  width: 80%;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+#expenseentry, 
+#expenseentry form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0.75em;
+}
+
+#expenseentry .title {
+  color: silver;
+  font-size: 2em;
+  margin: 4px;
+}
+
+#expenseedit {
+  flex-direction: column;
+}
+
+#editexpenseform {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0.75em;
+}
+
+#bottompopup {
+  align-items: center;
+  background: rgba(250,250,250,1);
+  border-radius: 0;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  bottom: -370;
+  box-shadow: 0 0 25px rgba(200,200,200,0.3);
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  transition: all 0.25s ease-in-out;
+  width: 80%;
+  z-index: 50;
+}
+
+#bottompopup.popup {
+  bottom: 0;
+}
+
+.piechart_3d {
+  /* align-self: stretch; */
+  
+  height: 100%;
+  /* max-width: 500px; */
+  justify-content: center;
+  overflow: hidden;
+  /* max-height: 500px; */
+  width: 100%;
+}
+
+.icon {
+  color: silver;
+  font-size: 1.5em;
+}
+
+.bigicon {
+  color: rgb(221, 68, 119);
+  font-size: 1.5em;
+  margin: -0.25em 4px 4px -0.5em;
+  text-shadow: 0 0 15px rgba(100,100,100,0.4);
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  /* border: 1px solid #f1f1f1; */
+  height: 300px;
+  padding: 0 1em 1em;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  /* width: 300px; */
+  width: 80%;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  height: 100%;
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  width: 100%;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card.flip .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card ~ #flip-icon > .fa-chart-pie {
+  visibility: hidden;
+  display: none;
+}
+
+.flip-card ~ #flip-icon > .fa-table {
+  visibility: visible;
+  display: inline-block;
+}
+
+.flip-card.flip ~ #flip-icon > .fa-chart-pie {
+  visibility: visible;
+  display: inline-block;
+}
+
+.flip-card.flip ~ #flip-icon > .fa-table {
+  visibility: hidden;
+  display: none;
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  /* background-color: #bbb; */
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: rgba(245,245,245,0.95);
+  /* color: white; */
+  justify-content: center;
+  overflow: auto;
+  overflow-x: hidden;
+  transform: rotateY(180deg);
+}
+
+.flip-card-back > #chart-table {
+  border-collapse: collapse;
+  /* font-size: 10px; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+/* EMBEDDED CHART TABLE */
+#chart-table {
+  border: none;
+  width: 100%;
+}
+
+/* #chart-table thead tr,
+#chart-table tbody {
+  display: block;
+  width: 100%;
+}
+
+#chart-table tbody {
+  height: 300px;
+  overflow-y: scroll;
+} */
+
+/* By default we hide leve-2 and level2 columns in table */
+#chart-table th,
+#chart-table td {
+  /* border: 1px solid silver; */
+  padding: 4px;
+  border-right: 1px dotted rgba(220,220,220,0.5);
+}
+
+#chart-table thead tr {
+  background-color: rgba(180,180,180,0.5);
+}
+
+#chart-table tr:nth-child(even) {
+  background-color: rgba(220,220,220,0.5);
+}
+
+#chart-table .col.l2,
+#chart-table .col.l3,
+#chart-table .col.l4 {
+  visibility: collapse;
+  display: none;
+}
+
+/* MEDIA QUERY ADJUSTMENTS */
+@media screen and (min-width: 600px) {
+  #chart-table .col.l2 {
+    visibility: visible;
+    display: table-cell;
+  }
+  #loginform {
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: center;
+  }  
+}
+
+@media screen and (min-width: 768px) {
+  #chart-table .col.l3 {
+    visibility: visible;
+    display: table-cell;
+  }
+  .flip-card {
+    height: 350px;
+    padding: 0 1em 1em;
+    width: 80%;
+  }  
+}
+
+@media screen and (min-width: 1200px) {
+  #chart-table .col.l4 {
+    visibility: visible;
+    display: table-cell;
+  }
+  .flip-card {
+    height: 500px;
+  }  
+}

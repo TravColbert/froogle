@@ -1,0 +1,788 @@
+/**
+ * ELEMENT DIMENSIONS
+ */
+/**
+ * FONTS
+ */
+/**
+ * COLORS
+ */
+/**
+* SHADOWS & EYE-CANDY
+*/
+.bold, .mainblurb, nav #menu-title {
+  font-weight: bolder;
+}
+
+.flexy, .flexy-row, nav .navlinks ul, header nav, footer nav, .buttonstyle, input[type=button],
+input[type=submit],
+submit, .flexy-column, #expensetable, .formfield, .logobox, .mainblurb, .container, header, footer, article, body {
+  display: flex;
+}
+
+.flexy-column, #expensetable, .formfield, .logobox, .mainblurb, .container, header, footer, article, body {
+  flex-direction: column;
+}
+
+.flexy-row, nav .navlinks ul, header nav, footer nav, .buttonstyle, input[type=button],
+input[type=submit],
+submit {
+  flex-direction: row;
+}
+
+.fixed-top, header {
+  position: fixed;
+  top: 0;
+}
+
+.fixed-bottom, footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+}
+
+.noresize {
+  resize: none;
+}
+
+.nowrap,
+.nobreak,
+.mainblurb div {
+  white-space: nowrap;
+}
+
+*:focus {
+  outline: none;
+}
+
+.text-shadow, #mainwelcome,
+#mainpage, header nav {
+  text-shadow: 0 1px 3px rgba(77, 75, 85, 0.25);
+}
+
+.mini-shadowed, .buttonstyle, input[type=button],
+input[type=submit],
+submit {
+  box-shadow: 0 3px 4px rgba(0, 0, 5, 0.2);
+}
+
+.hidden, #bottompopup.popup #icon-popup, #bottompopup #icon-popdown, .formfield label, .messagebox {
+  visibility: hidden;
+  display: none;
+}
+
+/* BUTTON STYLING */
+.buttonstyle, input[type=button],
+input[type=submit],
+submit {
+  background-color: rgba(245, 245, 245, 0.4);
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  flex: 1 0 auto;
+  justify-content: center;
+  margin-bottom: 8px;
+  padding: 8px;
+  text-decoration: none;
+}
+.buttonstyle i, input[type=button] i,
+input[type=submit] i,
+submit i {
+  margin-right: 0.5em;
+}
+
+.buttonstyle.compact, input.compact[type=button],
+input.compact[type=submit],
+submit.compact {
+  flex: 0 0 auto;
+}
+
+.buttonstyle:active, input[type=button]:active,
+input[type=submit]:active,
+submit:active {
+  box-shadow: none;
+}
+
+input[type=button],
+input[type=submit],
+submit {
+  font-size: 1em;
+}
+
+.buttonstyle.primary, input.primary[type=button],
+input.primary[type=submit],
+submit.primary {
+  background-color: #0095ff;
+}
+
+.buttonstyle.secondary, input.secondary[type=button],
+input.secondary[type=submit],
+submit.secondary {
+  background-color: #00fff8;
+}
+
+.buttonstyle.tertiary, input.tertiary[type=button],
+input.tertiary[type=submit],
+submit.tertiary {
+  background-color: #efbdeb;
+}
+
+.buttonstyle.success, input.success[type=button],
+input.success[type=submit],
+submit.success {
+  background-color: #79f1cd;
+}
+
+.buttonstyle.warning, input.warning[type=button],
+input.warning[type=submit],
+submit.warning {
+  background-color: #faa916;
+}
+
+.buttonstyle.danger, input.danger[type=button],
+input.danger[type=submit],
+submit.danger {
+  background-color: #e15554;
+}
+
+.buttonstyle.disabled, input.disabled[type=button],
+input.disabled[type=submit],
+submit.disabled {
+  background-color: #84828f;
+}
+
+/* END BUTTON STYLING */
+.jright {
+  text-align: right;
+}
+
+.jleft {
+  text-align: left;
+}
+
+.jcenter, #flip-icon {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+body,
+div,
+article {
+  display: flex;
+}
+
+body {
+  color: #646464;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background-color: whitesmoke;
+}
+
+article {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.backgroundsplash {
+  background-image: linear-gradient(135deg, #00fff8 20%, #0095ff 55.9%, whitesmoke 56%);
+  background-attachment: fixed;
+}
+
+header, footer {
+  width: 100%;
+  z-index: 99;
+  align-items: center;
+}
+nav {
+  background-color: #0095ff;
+  background-image: linear-gradient(to right, #00fff8 -40%, transparent 80%);
+  border-bottom: 1px solid rgba(162, 160, 173, 0.3);
+  color: white;
+  height: 56px;
+  justify-content: space-between;
+  margin: 0;
+  max-height: 56px;
+  max-width: 1024px;
+  position: fixed;
+  width: 100%;
+}
+nav a {
+  color: inherit;
+  text-decoration: none;
+}
+nav #menu-title {
+  color: inherit;
+  display: flex;
+  flex-direction: row;
+  font-family: inherit;
+  font-size: 2em;
+}
+@media only screen and (min-width: 601px) {
+  nav #menu-title {
+    flex: 1 0 auto;
+  }
+}
+nav #menu-title #app-title {
+  align-items: center;
+  padding-bottom: 0.08em;
+}
+nav .navcenter {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+}
+nav .navcenter div {
+  align-items: center;
+}
+nav .navlinks {
+  display: flex;
+  width: 30%;
+  justify-content: flex-end;
+  font-weight: 600;
+  color: inherit;
+}
+nav .navlinks ul {
+  justify-content: flex-end;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav .navlinks ul li {
+  display: flex;
+  flex-direction: row;
+  margin: 0 8px 0;
+}
+nav .navlinks ul li a, nav .navlinks ul li label {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+nav .navlinks #show-menu:not(:checked) ~ li.menu-link {
+  display: none;
+  visibility: hidden;
+}
+nav .navleft {
+  flex-direction: column;
+  justify-content: center;
+}
+nav > div:first-child {
+  padding-left: 8px;
+}
+@media only screen and (min-width: 601px) {
+  nav > div:first-child {
+    padding-left: 40px;
+  }
+}
+nav > div:last-child {
+  padding-right: 8px;
+}
+@media only screen and (min-width: 601px) {
+  nav > div:last-child {
+    padding-right: 40px;
+  }
+}
+
+body.backgroundsplash nav {
+  background: rgba(245, 245, 245, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+footer {
+  justify-content: flex-end;
+}
+footer nav {
+  height: 48px;
+}
+
+.container {
+  align-items: center;
+  background-color: transparent;
+  flex: 1 0;
+  justify-content: center;
+  max-height: 100%;
+  max-width: 1024px;
+  padding: 0;
+  width: 100%;
+}
+
+.wimpy {
+  flex: 0 0 auto;
+}
+
+#mainwelcome,
+#mainpage {
+  align-items: center;
+}
+#mainwelcome .container:first-child,
+#mainpage .container:first-child {
+  padding: 56px 0 0;
+}
+
+#mainwelcome {
+  color: white;
+}
+
+#mainpage {
+  color: inherit;
+}
+
+.fullpage {
+  height: 100%;
+  flex: 1 0 auto;
+}
+
+.container > * {
+  width: 80%;
+  margin: 0 40px;
+}
+
+.container > *:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.container hr {
+  border-style: solid;
+  width: 20%;
+  border-top: 1px;
+  margin: 16px 0 0;
+}
+
+.mainblurb {
+  font-size: 2.2em;
+}
+.logobox {
+  align-items: center;
+  margin-top: -20px;
+}
+
+#coinslogo {
+  width: 300px;
+}
+
+.bigproblem, .bigbanner {
+  align-items: center;
+  flex-direction: column;
+}
+
+.error404, .welcome {
+  color: silver;
+  font-size: 7em;
+}
+
+.vertical,
+.form--vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.formbox {
+  background-color: rgba(245, 245, 245, 0.4);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.messagebox {
+  align-self: center;
+  width: 80%;
+}
+.messagebox div {
+  margin: 0 40px;
+}
+
+.loginbox,
+.formbox {
+  width: 80%;
+}
+
+#loginform,
+#registerform {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formbox > form {
+  margin: 0;
+}
+
+.fieldset {
+  border-radius: 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.fieldset .formfield:not(:last-child) {
+  margin: 0 4px 4px;
+}
+
+.fieldset .formfield:last-child {
+  margin: 0 4px 0px;
+}
+
+.fieldset .formfield:last-child input,
+.fieldset .formfield:last-child textarea,
+.fieldset .formfield:last-child select {
+  border-bottom: none;
+}
+
+.formfield {
+  align-items: stretch;
+  flex: 1 0 auto;
+  margin: 0;
+  min-width: 50%;
+  padding: 0;
+}
+.formfield input:not([type=button]):not([type=submit]),
+.formfield textarea,
+.formfield select {
+  margin: 0;
+}
+.formfield label {
+  font-size: 0.8em;
+}
+
+.formfield label {
+  margin: 4px 8px 0;
+}
+
+input:not([type=button]):not([type=submit]),
+textarea,
+select {
+  font-size: 1em;
+  padding: 8px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6461a0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.backgroundsplash input::placeholder,
+body.backgroundsplash textarea::placeholder {
+  color: #646464;
+}
+
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=datetime-local],
+select,
+textarea {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px dashed silver;
+}
+
+input[type=text]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=datetime-local]:focus,
+select:focus,
+textarea:focus {
+  background-color: rgba(245, 245, 245, 0.4);
+  border-bottom: 1px solid silver;
+  outline: none;
+}
+
+.welcome a {
+  /* text-transform: none; */
+  text-decoration: none;
+  color: silver;
+}
+
+#expensetable {
+  width: 80%;
+  overflow-y: scroll;
+}
+
+#expenseentry,
+#expenseentry form {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .title,
+#expenseentry .title,
+#expenseedit .title,
+#expensetable .title {
+  color: #0095ff;
+  font-size: 2em;
+  justify-content: center;
+  margin: 4px;
+}
+
+#expenseedit {
+  flex-direction: column;
+}
+
+#editexpenseform {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0.75em;
+}
+
+#bottompopup {
+  align-items: center;
+  align-self: center;
+  background: #fafafa;
+  border-radius: 0;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  bottom: 0;
+  box-shadow: 0 0 25px rgba(200, 200, 200, 0.3);
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: center;
+  position: fixed;
+  width: 80%;
+  z-index: 50;
+}
+#bottompopup #icon-popup {
+  color: #0095ff;
+  display: block;
+  visibility: visible;
+}
+#bottompopup #icon-popdown {
+  color: #e15554;
+}
+
+#bottompopup.popup {
+  bottom: 0;
+}
+#bottompopup.popup #icon-popdown {
+  display: block;
+  visibility: visible;
+}
+
+#addexpenseform {
+  height: 0;
+  margin-block-end: 0;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+
+#addexpenseform input {
+  width: auto;
+}
+
+#bottompopup.popup #addexpenseform {
+  height: auto;
+  margin-block-end: 1em;
+}
+
+.piechart_3d {
+  /* align-self: stretch; */
+  height: 100%;
+  /* max-width: 500px; */
+  justify-content: center;
+  overflow: hidden;
+  /* max-height: 500px; */
+  width: 100%;
+}
+
+.icon {
+  color: inherit;
+  font-size: 2.5em;
+}
+
+.bigicon {
+  font-size: 1.5em;
+  margin: -0.25em 4px 4px -0.5em;
+  text-shadow: 0 0 15px rgba(100, 100, 100, 0.4);
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  /* border: 1px solid #f1f1f1; */
+  height: 300px;
+  padding: 0 1em 1em;
+  perspective: 1000px;
+  /* Remove this if you don't want the 3D effect */
+  /* width: 300px; */
+  width: 80%;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  height: 100%;
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  width: 100%;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card.flip .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card ~ #flip-icon > .fa-chart-pie {
+  visibility: hidden;
+  display: none;
+}
+
+.flip-card ~ #flip-icon > .fa-table {
+  visibility: visible;
+  display: inline-block;
+}
+
+.flip-card.flip ~ #flip-icon > .fa-chart-pie {
+  visibility: visible;
+  display: inline-block;
+}
+
+.flip-card.flip ~ #flip-icon > .fa-table {
+  visibility: hidden;
+  display: none;
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  /* background-color: #bbb; */
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: rgba(245, 245, 245, 0.95);
+  /* color: white; */
+  justify-content: center;
+  overflow: auto;
+  overflow-x: hidden;
+  transform: rotateY(180deg);
+}
+
+.flip-card-back > #chart-table {
+  border-collapse: collapse;
+  /* font-size: 10px; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+/* EMBEDDED CHART TABLE */
+#chart-table {
+  border: none;
+  width: 100%;
+}
+
+/* #chart-table thead tr,
+#chart-table tbody {
+  display: block;
+  width: 100%;
+}
+
+#chart-table tbody {
+  height: 300px;
+  overflow-y: scroll;
+} */
+#chart-selector {
+  justify-content: center;
+}
+
+/* By default we hide leve-2 and level2 columns in table */
+#chart-table th,
+#chart-table td {
+  /* border: 1px solid silver; */
+  padding: 4px;
+  border-right: 1px dotted rgba(220, 220, 220, 0.5);
+}
+
+#chart-table thead tr {
+  background-color: rgba(180, 180, 180, 0.5);
+}
+
+#chart-table tr:nth-child(even) {
+  background-color: rgba(220, 220, 220, 0.5);
+}
+
+#chart-table .col.l2,
+#chart-table .col.l3,
+#chart-table .col.l4 {
+  visibility: collapse;
+  display: none;
+}
+
+/* FORM FIELD ERROR STATES */
+input.valid,
+textarea.valid,
+select.valid {
+  border-color: initial;
+  background: #79f1cd;
+}
+
+input.invalid,
+textarea.invalid,
+select.invalid {
+  border-color: red;
+  /* border: 1px solid rgba(0,0,0,0.1); */
+  /* border-radius: 3px; */
+  background: #e15554;
+}
+
+/* MEDIA QUERY ADJUSTMENTS */
+@media screen and (min-width: 600px) {
+  #chart-table .col.l2 {
+    display: table-cell;
+    visibility: visible;
+  }
+
+  .formfield {
+    flex-direction: row;
+  }
+  .formfield label {
+    align-items: center;
+    display: flex;
+    font-size: 0.9em;
+    justify-content: flex-end;
+    width: 25%;
+    visibility: visible;
+  }
+  .formfield input,
+.formfield textarea,
+.formfield select {
+    flex: 1 0 auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  #chart-table .col.l3 {
+    display: table-cell;
+    visibility: visible;
+  }
+
+  .flip-card {
+    height: 350px;
+    padding: 0 1em 0;
+    width: 80%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #chart-table .col.l4 {
+    visibility: visible;
+    display: table-cell;
+  }
+
+  .flip-card {
+    height: 500px;
+  }
+}
+
+/*# sourceMappingURL=froogle.css.map */
