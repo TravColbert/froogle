@@ -275,8 +275,25 @@ Class Froogle {
     }
   }
 
-  public function goRegister($matches) {
-    return $this->phpht->view("register.php");
+  public function goVerify($matches) {
+    syslog(LOG_INFO,"attempting to verify registration");
+    try {
+      $auth->confirmEmail($_GET['selector'], $_GET['token']);
+      echo 'Email address has been verified';
+      return $this->phpht->redirectTo($this->phpht->baseurl);
+    }
+    catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
+      die('Invalid token');
+    }
+    catch (\Delight\Auth\TokenExpiredException $e) {
+        die('Token expired');
+    }
+    catch (\Delight\Auth\UserAlreadyExistsException $e) {
+        die('Email address already exists');
+    }
+    catch (\Delight\Auth\TooManyRequestsException $e) {
+        die('Too many requests');
+    }
   }
 
   public function goSettings($matches) {
@@ -383,9 +400,11 @@ Class Froogle {
   public function postRegister($matches) {
     syslog(LOG_INFO, "attempting register");
     try {
-      $userId = $this->auth->register($_POST["email"],$_POST["pass"]);
-      syslog(LOG_INFO, "user successfully registered with ID: ".$userId);
-      syslog(LOG_INFO, "need to connect user to a domain!...");
+      $userId = $this->auth->register($_POST["email"],$_POST["pass"],null, function () {
+        syslog(LOG_INFO, "user registered with ID: ".$userId);
+        syslog(LOG_INFO, "user must be verified");
+        syslog(LOG_INFO, "sending email verification");
+      });
 
       // Maybe put a success message in the message queue...
       $this->phpht->view("login.php",array("message" => array("user successfully registered")));
@@ -711,5 +730,9 @@ Class Froogle {
       $target = "expenses.php";
     }
     return $this->phpht->view($target,$data);
+  }
+
+  public function viewRegister($matches) {
+    return $this->phpht->view("register.php");
   }
 }
